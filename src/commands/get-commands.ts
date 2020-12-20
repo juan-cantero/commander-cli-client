@@ -4,12 +4,15 @@ import cli from "cli-ux";
 import CommandDtoMapper from "../services/command-dto-mapper";
 import { ICommand } from "../types/command.types";
 import CommandsTable from "../services/commands-table";
+import AuthenticationService from "../authentication/authentication.service";
 
 const execa = require("execa");
 
 export default class GetCommands extends Command {
   private commandDtoMapper: CommandDtoMapper = new CommandDtoMapper();
   private table: CommandsTable = new CommandsTable();
+  private authService = new AuthenticationService();
+
   static description = "Get all the commands";
   static flags = {
     bgcolor: flags.string({
@@ -30,7 +33,8 @@ export default class GetCommands extends Command {
       cli.action.start("fetching list of commands", "initializing", {
         stdout: true,
       });
-      const { commands } = await CommanderApi.getAllCommands();
+      let token = await this.authService.getToken();
+      const { commands } = await CommanderApi.getAllCommands(token);
 
       const mappedCommands: ICommand[] = this.commandDtoMapper.mapListOfCommands(
         commands

@@ -1,9 +1,11 @@
 import Command from "@oclif/command";
 import inquirer = require("inquirer");
-import CommanderApi from "../api/commander";
+import AuthenticationService from "../authentication/authentication.service";
+import LoginData from "../types/logindata.types";
 
 export default class Login extends Command {
   static description: "Login";
+  private authService = new AuthenticationService();
 
   async run() {
     inquirer
@@ -20,9 +22,10 @@ export default class Login extends Command {
           mask: "*",
         },
       ])
-      .then(async (responses) => {
-        const data = await CommanderApi.login(responses);
-        console.log(data);
+      .then(async (loginData: LoginData) => {
+        const data = await this.authService.login(loginData);
+        const token = data.token;
+        await this.authService.saveToken(token);
       });
   }
 }

@@ -6,8 +6,14 @@ export default class CommanderApi {
     baseURL: "http://localhost:5000/api",
   });
 
-  static async getAllCommands() {
-    const { data } = await this.axios.get("/commands");
+  static async getAllCommands(token: any) {
+    const formatedToken = token.trim();
+    const { data } = await this.axios.get("/commands", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${formatedToken}`,
+      },
+    });
     return data;
   }
 
