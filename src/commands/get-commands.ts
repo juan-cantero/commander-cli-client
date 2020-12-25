@@ -1,5 +1,5 @@
 import Command, { flags } from "@oclif/command";
-import CommanderApi from "../api/commander";
+import CommandApi from "../api/CommandApi";
 import cli from "cli-ux";
 import CommandDtoMapper from "../services/command-dto-mapper";
 import { ICommand } from "../types/command.types";
@@ -34,14 +34,19 @@ export default class GetCommands extends Command {
         stdout: true,
       });
       let token = await this.authService.getToken();
-      const { commands } = await CommanderApi.getAllCommands(token);
+      let userId = (await this.authService.getUserId()) as string;
+      const commands: any[] = await CommandApi.getAllCommands(token, userId);
 
-      const mappedCommands: ICommand[] = this.commandDtoMapper.mapListOfCommands(
-        commands
-      );
+      if (commands?.length) {
+        const mappedCommands: ICommand[] = this.commandDtoMapper.mapListOfCommands(
+          commands
+        );
 
-      this.table.config(mappedCommands);
-      this.table.print(backgroundColor, color);
+        this.table.config(mappedCommands);
+        this.table.print(backgroundColor, color);
+      } else {
+        console.log("you do not have any command yet");
+      }
 
       cli.action.stop("done");
     } catch (error) {

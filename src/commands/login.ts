@@ -25,7 +25,9 @@ export default class Login extends Command {
       .then(async (loginData: LoginData) => {
         const data = await this.authService.login(loginData);
         const token = data.token;
-        await this.authService.saveToken(token);
+        const id = data._id;
+
+        await this.authService.saveLoginInfo(token, id);
       });
   }
 }

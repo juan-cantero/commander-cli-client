@@ -11,3 +11,14 @@ export interface CommandInputDto {
     platform: string;
   };
 }
+
+export class UserCreateDto {
+  name!: String;
+  email!: String;
+  password!: String;
+}
+
+export interface UserCredentials {
+  email: string;
+  password: string;
+}
