@@ -1,5 +1,6 @@
 import Axios from "axios";
 import { CommandInputDto } from "../types/CommandInputDto";
+import { CommandSearch } from "../types/CommandSearch";
 import LoginData from "../types/logindata.types";
 
 export default class CommandApi {
@@ -17,6 +18,27 @@ export default class CommandApi {
         Authorization: `Bearer ${formatedToken}`,
       },
     });
+    return data;
+  }
+
+  static async searchCommands(token: any, search: CommandSearch) {
+    const formatedToken = token.trim();
+    const formattedDescription = search.description
+      .toLowerCase()
+      .slice(0, search.description.length)
+      .trim();
+    const platformQuery = `platform=${search.platform}` ?? "";
+    const descriptionQuery = `description=${formattedDescription}` ?? "";
+
+    const { data } = await this.axios.get(
+      `/search?${descriptionQuery}&${platformQuery}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${formatedToken}`,
+        },
+      }
+    );
     return data;
   }
 

@@ -1,9 +1,5 @@
 import Command, { flags } from "@oclif/command";
 import CommandApi from "../api/CommandApi";
-import cli from "cli-ux";
-import CommandDtoMapper from "../services/command-dto-mapper";
-import { ICommand } from "../types/command.types";
-import CommandsTable from "../services/commands-table";
 import AuthenticationService from "../authentication/authentication.service";
 import inquirer = require("inquirer");
 import { CommandInputDto } from "../types/CommandInputDto";
@@ -12,8 +8,6 @@ import { validateOrReject } from "class-validator";
 const execa = require("execa");
 
 export default class CreateCommand extends Command {
-  private commandDtoMapper: CommandDtoMapper = new CommandDtoMapper();
-  private table: CommandsTable = new CommandsTable();
   private authService = new AuthenticationService();
 
   static description = "create command";
