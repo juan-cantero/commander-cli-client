@@ -54,7 +54,7 @@ export default class CreateCommand extends Command {
           await validateOrReject(commandInput);
           await CommandApi.createCommand(token, commandInput);
         } catch (error) {
-          console.log(error);
+          console.log(error.response.data.message);
         }
       });
   }

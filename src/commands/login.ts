@@ -28,6 +28,9 @@ export default class Login extends Command {
         const id = data._id;
 
         await this.authService.saveLoginInfo(token, id);
+      })
+      .catch((error) => {
+        console.log(error.response.data.message);
       });
   }
 }

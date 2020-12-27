@@ -53,4 +53,30 @@ export default class CommandApi {
     });
     return data;
   }
+
+  static async getCommandIdByNameAndPlatform(
+    token: any,
+    command: string,
+    platform: string
+  ) {
+    const formatedToken = token.trim();
+    const { data } = await this.axios.get(`/${command}/${platform}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${formatedToken}`,
+      },
+    });
+    return data;
+  }
+
+  static async deleteCommand(token: any, id: string) {
+    const formatedToken = token.trim();
+    const { data } = await this.axios.delete(`/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${formatedToken}`,
+      },
+    });
+    return data;
+  }
 }

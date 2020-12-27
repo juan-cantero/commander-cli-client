@@ -62,12 +62,10 @@ export default class GetCommands extends Command {
         this.table.config(mappedCommands);
         this.table.print(backgroundColor, color);
       } else {
-        console.log("you do not have any command yet");
+        console.log("Not commands found");
       }
-
-      cli.action.stop("done");
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data.message);
     }
   }
 }

@@ -7,6 +7,16 @@ class Table {
   public config(tableData: any[]): void {
     const config = {
       border: getBorderCharacters(`norc`),
+      columns: {
+        0: {
+          width: 20,
+          alignment: "center",
+        },
+        1: {
+          alignment: "center",
+          width: 50,
+        },
+      },
     };
     this.output = table(tableData, config);
   }
