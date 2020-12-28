@@ -6,6 +6,7 @@ import { ICommand } from "../types/command.types";
 import CommandsTable from "../services/commands-table";
 import AuthenticationService from "../authentication/authentication.service";
 import { CommandSearch } from "../types/CommandSearch";
+import chalk = require("chalk");
 
 const execa = require("execa");
 
@@ -27,10 +28,31 @@ export default class GetCommands extends Command {
     bgcolor: flags.string({
       char: "b",
       description: "background color for table",
+      options: [
+        "bgBlue",
+        "bgBlueBright",
+        "bgGreen",
+        "bgGreenBright",
+        "bgRedBright",
+        "bgRed",
+        "bgMagenta",
+        "bgYellow",
+      ],
     }),
     color: flags.string({
       char: "c",
       description: "color",
+      options: [
+        "red",
+        "blue",
+        "green",
+        "redBright",
+        "blueBright",
+        "redBright",
+        "greenBright",
+        "magenta",
+        "yellow",
+      ],
     }),
   };
   async run() {
@@ -42,7 +64,7 @@ export default class GetCommands extends Command {
     let commands: any[];
 
     try {
-      cli.action.start("fetching list of commands", "initializing", {
+      cli.action.start("fetching list of commands", "loading", {
         stdout: true,
       });
       let token = await this.authService.getToken();
@@ -65,7 +87,7 @@ export default class GetCommands extends Command {
         console.log("Not commands found");
       }
     } catch (error) {
-      console.log(error.response.data.message);
+      console.log(chalk.red(error.response.data.message));
     }
   }
 }

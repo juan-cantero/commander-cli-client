@@ -1,8 +1,12 @@
 import axios from "axios";
 import { UserCreateDto, UserCredentials } from "../types/command.types";
+import * as dotenv from "dotenv";
+dotenv.config();
+
+const SERVER_URL = process.env.SERVER_URL;
 
 const userApiCall = axios.create({
-  baseURL: `http://192.168.0.104:5000/api/users`,
+  baseURL: `${SERVER_URL}/api/users`,
 });
 
 class UserApi {

@@ -4,6 +4,7 @@ import AuthenticationService from "../authentication/authentication.service";
 import inquirer = require("inquirer");
 import { CommandInputDto } from "../types/CommandInputDto";
 import { validateOrReject } from "class-validator";
+import chalk = require("chalk");
 
 const execa = require("execa");
 
@@ -43,7 +44,6 @@ export default class CreateCommand extends Command {
         },
       ])
       .then(async (data) => {
-        console.log(userId);
         const commandInput = new CommandInputDto();
         commandInput.user = userId as string;
         commandInput.command = data.command;
@@ -52,9 +52,12 @@ export default class CreateCommand extends Command {
 
         try {
           await validateOrReject(commandInput);
-          await CommandApi.createCommand(token, commandInput);
+          const command = await CommandApi.createCommand(token, commandInput);
+          if (command) {
+            console.log(chalk.green("command created successfully"));
+          }
         } catch (error) {
-          console.log(error.response.data.message);
+          console.log(chalk.magenta(error.response.data.message));
         }
       });
   }

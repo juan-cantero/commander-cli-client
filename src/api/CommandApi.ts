@@ -1,11 +1,14 @@
 import Axios from "axios";
 import { CommandInputDto } from "../types/CommandInputDto";
 import { CommandSearch } from "../types/CommandSearch";
-import LoginData from "../types/logindata.types";
+import * as dotenv from "dotenv";
+dotenv.config();
+
+const SERVER_URL = process.env.SERVER_URL;
 
 export default class CommandApi {
   static axios = Axios.create({
-    baseURL: "http://localhost:5000/api/commands",
+    baseURL: `${SERVER_URL}/api/commands`,
   });
 
   static async getAllCommands(token: any, userId: string) {

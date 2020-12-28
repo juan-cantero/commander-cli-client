@@ -7,6 +7,7 @@ import CommandsTable from "../services/commands-table";
 import AuthenticationService from "../authentication/authentication.service";
 import { CommandSearch } from "../types/CommandSearch";
 import { platform } from "os";
+import chalk = require("chalk");
 
 const execa = require("execa");
 
@@ -44,9 +45,9 @@ export default class DeleteCommand extends Command {
         platform
       );
       const response = await CommandApi.deleteCommand(token, commandId);
-      console.log(response);
+      console.log(chalk.magenta(response.message));
     } catch (error) {
-      console.log(error);
+      console.log(chalk.bgRedBright(error.response.data.message));
     }
   }
 }
