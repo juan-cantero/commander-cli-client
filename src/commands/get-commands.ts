@@ -8,8 +8,6 @@ import AuthenticationService from "../authentication/authentication.service";
 import { CommandSearch } from "../types/CommandSearch";
 import chalk = require("chalk");
 
-const execa = require("execa");
-
 export default class GetCommands extends Command {
   private commandDtoMapper: CommandDtoMapper = new CommandDtoMapper();
   private table: CommandsTable = new CommandsTable();
@@ -68,6 +66,7 @@ export default class GetCommands extends Command {
         stdout: true,
       });
       let token = await this.authService.getToken();
+
       let userId = (await this.authService.getUserId()) as string;
       if (description || platform) {
         const search = new CommandSearch(description ?? "", platform);
@@ -87,6 +86,7 @@ export default class GetCommands extends Command {
         console.log("Not commands found");
       }
     } catch (error) {
+      console.log(error);
       console.log(chalk.red(error.response.data.message));
     }
   }

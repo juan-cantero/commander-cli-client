@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { getBorderCharacters, table } from "table";
 import chalk = require("chalk");
 

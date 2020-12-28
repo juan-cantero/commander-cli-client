@@ -15,11 +15,11 @@ cli client for commander
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g commander-cli
+$ npm install -g commander-juan
 $ commander-cli COMMAND
 running command...
 $ commander-cli (-v|--version|version)
-commander-cli/0.0.0 linux-x64 node-v14.15.1
+commander-juan/0.0.0 linux-x64 node-v10.19.0
 $ commander-cli --help [COMMAND]
 USAGE
   $ commander-cli COMMAND
@@ -28,28 +28,58 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`commander-cli hello [FILE]`](#commander-cli-hello-file)
+* [`commander-cli create-command`](#commander-cli-create-command)
+* [`commander-cli delete-command`](#commander-cli-delete-command)
+* [`commander-cli get-commands`](#commander-cli-get-commands)
 * [`commander-cli help [COMMAND]`](#commander-cli-help-command)
+* [`commander-cli login`](#commander-cli-login)
 
-## `commander-cli hello [FILE]`
+## `commander-cli create-command`
 
-describe the command here
+create command
 
 ```
 USAGE
-  $ commander-cli hello [FILE]
-
-OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
-
-EXAMPLE
-  $ commander-cli hello
-  hello world from ./src/hello.ts!
+  $ commander-cli create-command
 ```
 
-_See code: [src/commands/hello.ts](https://github.com/juan-cantero/commander-cli/blob/v0.0.0/src/commands/hello.ts)_
+_See code: [src/commands/create-command.ts](https://github.com/juan-cantero/commander-cli/blob/v0.0.0/src/commands/create-command.ts)_
+
+## `commander-cli delete-command`
+
+Get all the commands
+
+```
+USAGE
+  $ commander-cli delete-command
+
+OPTIONS
+  -n, --name=name          (required) name of the command
+  -p, --platform=platform  (required) platform
+```
+
+_See code: [src/commands/delete-command.ts](https://github.com/juan-cantero/commander-cli/blob/v0.0.0/src/commands/delete-command.ts)_
+
+## `commander-cli get-commands`
+
+Get all the commands
+
+```
+USAGE
+  $ commander-cli get-commands
+
+OPTIONS
+  -b, --bgcolor=bgBlue|bgBlueBright|bgGreen|bgGreenBright|bgRedBright|bgRed|bgMagenta|bgYellow  background color for
+                                                                                                table
+
+  -c, --color=red|blue|green|redBright|blueBright|redBright|greenBright|magenta|yellow          color
+
+  -d, --description=description                                                                 command description
+
+  -p, --platform=platform                                                                       platform
+```
+
+_See code: [src/commands/get-commands.ts](https://github.com/juan-cantero/commander-cli/blob/v0.0.0/src/commands/get-commands.ts)_
 
 ## `commander-cli help [COMMAND]`
 
@@ -67,4 +97,13 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.1/src/commands/help.ts)_
+
+## `commander-cli login`
+
+```
+USAGE
+  $ commander-cli login
+```
+
+_See code: [src/commands/login.ts](https://github.com/juan-cantero/commander-cli/blob/v0.0.0/src/commands/login.ts)_
 <!-- commandsstop -->

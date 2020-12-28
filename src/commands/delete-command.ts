@@ -2,21 +2,16 @@ import Command, { flags } from "@oclif/command";
 import CommandApi from "../api/CommandApi";
 import cli from "cli-ux";
 import CommandDtoMapper from "../services/command-dto-mapper";
-import { ICommand } from "../types/command.types";
 import CommandsTable from "../services/commands-table";
 import AuthenticationService from "../authentication/authentication.service";
-import { CommandSearch } from "../types/CommandSearch";
-import { platform } from "os";
 import chalk = require("chalk");
-
-const execa = require("execa");
 
 export default class DeleteCommand extends Command {
   private commandDtoMapper: CommandDtoMapper = new CommandDtoMapper();
   private table: CommandsTable = new CommandsTable();
   private authService = new AuthenticationService();
 
-  static description = "Get all the commands";
+  static description = "Delete a command";
   static flags = {
     name: flags.string({
       char: "n",

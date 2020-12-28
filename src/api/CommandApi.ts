@@ -4,7 +4,7 @@ import { CommandSearch } from "../types/CommandSearch";
 import * as dotenv from "dotenv";
 dotenv.config();
 
-const SERVER_URL = process.env.SERVER_URL;
+const SERVER_URL = "https://fast-scrubland-75741.herokuapp.com";
 
 export default class CommandApi {
   static axios = Axios.create({

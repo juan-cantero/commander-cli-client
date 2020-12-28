@@ -1,12 +1,10 @@
-import Command, { flags } from "@oclif/command";
+import Command from "@oclif/command";
 import CommandApi from "../api/CommandApi";
 import AuthenticationService from "../authentication/authentication.service";
 import inquirer = require("inquirer");
 import { CommandInputDto } from "../types/CommandInputDto";
 import { validateOrReject } from "class-validator";
 import chalk = require("chalk");
-
-const execa = require("execa");
 
 export default class CreateCommand extends Command {
   private authService = new AuthenticationService();
